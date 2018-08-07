@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sudoku</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="row">
+	<div class="column">		
+		<h1>SUDOKU</h1>
+
+		<button class="up" onclick="player.chooseBoard('Easy')">Easy</button>
+		<button class="up" onclick="player.chooseBoard('Medium')">Medium</button>
+		<button class="up" onclick="player.chooseBoard('Hard')">Hard</button>
+		<button class="up" onclick="player.chooseBoard('Expert')">Expert</button>
+		
+		<p id="paragraf">Difficulty: <span id="difficulty"></span></p>
+		<p id="message"></p>
+		
+		<div id="place">
+			<table id="table"></table>		
+		</div>
+
+		<button class="main" onclick="comp.solve()">Solve Sudoku</button>
+		
+		<button class="down" title="Start the same Sudoku from the beginning." onclick="player.startAgain()">
+			Start again
+		</button>
+		
+		<button class="down" title="Create empty Sudoku board" onclick="player.emptySudoku()">
+			Empty Sudoku
+		</button>
+		
+		<button class="down" title="Check if the solution is correct" onclick="player.checkResult()">
+			Check result
+		</button>		
+	</div>
+
+	<div class="column">		
+		<h2>Instructions:</h2>		
+		<ul>
+			<li>You can enter your own Sudoku to empty board.</li>
+			<li>Or choose difficulty to play our Sudoku.</li>			
+			<li>Click on a cell to activate it.</li>
+			<li>Press "1" to "9" to enter a number.</li>
+			<li>Press "0" or "Delete" to empty the cell.</li>
+			<li>Press "Escape" to inactivate the cell.</li>
+			<li>Press "Solve Sudoku" button to see the solution.</li>			
+		</ul>		
+	</div>	
+</div>
+
+<script src="js/game.js"></script>
+<script src="js/player.js"></script>
+<script src="js/view.js"></script>
+<script src="js/comp.js"></script>
+<script src="js/firstWay.js"></script>
+<script src="js/secondWay.js"></script>
+<script src="js/guess.js"></script>
+
+<script>	
+	game.start();	
+</script>
+
+</body>
+</html>
