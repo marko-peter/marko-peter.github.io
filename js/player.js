@@ -18,10 +18,6 @@ var player = {
 		// check if the user click on a table cell and it is not unchangeable
 		if (target.nodeName === 'TD' && !target.classList.contains('unchangeable')) {
 			
-			let input = document.createElement('input');
-			target.appendChild(input);
-			input.focus();
-			
 			// set the active cell and highlight it
 			view.activeCell = target;			
 			view.activeCell.classList.add('active');
