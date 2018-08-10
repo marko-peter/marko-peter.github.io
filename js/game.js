@@ -1,5 +1,5 @@
 /*
-Manage all about Sudoku boards, AJAX loading.
+Handle all about Sudoku boards, AJAX loading.
 */
 
 var game = {
@@ -38,7 +38,6 @@ var game = {
 
 	// called when index.html is loading
 	start() {
-
 		// load sudoku boards with AJAX
 		this.loadBoards();
 		
@@ -54,43 +53,35 @@ var game = {
 	The maximum is exclusive and the minimum is inclusive.
 	*/
 	getRandomInt(min, max) {
-
 		min = Math.ceil(min);
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min)) + min;
 	},
 
 	// load Sudoku boards with AJAX
-	loadBoards() {	
-
+	loadBoards() {
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', 'https://marko-peter.github.io/json-data/boards.json', true);
 
 		xhr.onload = function() {
-
 			if(this.status == 200) {				
 				game.loadedBoards = JSON.parse(this.responseText);				
 			} else {
 				view.showMessage('red', 'BOARDS NOT LOADED!!!');
 			}		
 		}
-
 		xhr.onerror = function() {
-
 			view.showMessage('red', 'BOARDS NOT LOADED!!!');
 		}
-
 		xhr.send();	
 	},
 
 	// prepare "game.board" for the play
 	loadRandomBoard(level) {
-
 		// check if boards have been loaded
 		if(this.loadedBoards.length === 0) {
 			this.loadBoards();
 		} else {			
-			
 			// filter boards according to "level of difficulty"
 			let filteredBoards = this.loadedBoards.find( item => item.difficulty === level )
 
@@ -101,8 +92,7 @@ var game = {
 
 			// iterate over all cells and update them with numbers
 			for (let i = 0; i < 9; i++) {
-				for (let j = 0; j < 9; j++) {					
-										
+				for (let j = 0; j < 9; j++) {										
 					this.updateBoard(i, j, this.presentBoard[i][j]);
 				}
 			}
@@ -111,7 +101,6 @@ var game = {
 
 	// update "game.board" with new value
 	updateBoard(row, column, newValue) {
-
 		this.board[row][column] = newValue;		
 	},
 
@@ -120,10 +109,8 @@ var game = {
 	However there is another "finalCheck" function to make a deep check.
 	*/
 	isSolved() {
-
 		for (let i = 0; i < 9; i++) {
 			for (let j = 0; j < 9; j++) {
-
 				if( (this.board[i][j] === 0) )  {return false;}
 			}
 		}				
@@ -135,14 +122,12 @@ var game = {
 	Check if all rows, columns and 3x3 grids contains all numbers 1 to 9.
 	*/
 	finalCheck() {
-
 		// coordinates of the first cell of each 3x3 grid on Sudoku board
 		let gridRow = [0,0,0,3,3,3,6,6,6];
 		let gridColumn = [0,3,6,0,3,6,0,3,6];
 
 		// iterate over all 9 rows/columns/grids
 		for (let i = 0; i < 9; i++) {
-
 			// get "i" row of "game.board"
 			let rowArray = this.board[i];
 			
@@ -153,8 +138,7 @@ var game = {
 			let gridArray = this.getGridArray(gridRow[i], gridColumn[i]);		
 
 			// searching for numbers 1 to 9 in each row/column/grid
-			for (let j = 1; j < 10; j++) {
-				
+			for (let j = 1; j < 10; j++) {				
 				if(!rowArray.includes(j)) {return false;}
 				if(!columnArray.includes(j)) {return false;}
 				if(!gridArray.includes(j)) {return false;}
@@ -165,12 +149,10 @@ var game = {
 
 	// creates array from given column of "game.board"
 	getColumnArray(col) {
-
 		let tempArray = [];
 
 		// iterate over all 9 rows
 		for (let i = 0; i < 9; i++) {
-
 			tempArray.push(this.board[i][col]);
 		}
 		return tempArray;
@@ -178,15 +160,12 @@ var game = {
 
 	// creates array from given 3x3 grid of "game.board"
 	getGridArray(startRow, startColumn) {
-
 		let tempArray = [];
 
 		// iterate over 3 rows
-		for (let i = startRow; i < startRow + 3; i++) {
-			
+		for (let i = startRow; i < startRow + 3; i++) {			
 			// iterate over 3 columns
-			for (let j = startColumn; j < startColumn + 3; j++) {
-				
+			for (let j = startColumn; j < startColumn + 3; j++) {				
 				tempArray.push(this.board[i][j]);				
 			}
 		}

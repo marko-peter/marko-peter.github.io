@@ -14,7 +14,6 @@ var guess = {
 
 		// if there is no array with length 2, we try to find 3 or 4 or ...		
 		while (!position) {
-
 			arrLength++;
 			position = this.findPosition(arrLength);			
 			if(arrLength > 9) {return;}			
@@ -26,7 +25,7 @@ var guess = {
 		// save the board, so we can step backwards, if we do not guess the number at first time
 		comp.saveBoard(origBoard);
 		
-		for (let i = 0; i < arrLength; i++) {			
+		for (let i = 0; i < arrLength; i++) {
 
 			// try number "cell[i]" and check if we can solve other cells
 			game.updateBoard(position[0], position[1], cell[i]);
@@ -47,7 +46,7 @@ var guess = {
 
 				// if guess.try() function returns and the game is not solved, it means, "cell[i]" is not correct
 				if (!game.isSolved()) {
-					
+									
 					// get back and try another number, continue with next iteration 				
 					comp.getBack(origBoard);													
 				}
@@ -68,11 +67,10 @@ var guess = {
 	},	
 
 	// find first cell of secondBoard with given array length
-	findPosition(arrLength) {
-		
+	findPosition(arrLength) {		
 		for (let i = 0; i < 9; i++) {						
 			for (let j = 0; j < 9; j++) {
-				
+
 				// return coordinates of found cell [row, column]
 				if(comp.secondBoard[i][j].length === arrLength) {return [i,j];}
 			}
@@ -83,10 +81,9 @@ var guess = {
 
 	// check if there is a mistake
 	checkForBlanks() {
-
 		for (let i = 0; i < 9; i++) {			
-			for (let j = 0; j < 9; j++) {				
-				
+			for (let j = 0; j < 9; j++) {
+
 				// if this condition is true, guessed number was not correct.
 				if( (game.board[i][j] === 0) && (comp.secondBoard[i][j].length === 0) ) {
 					return true;

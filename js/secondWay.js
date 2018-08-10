@@ -11,13 +11,11 @@ var secondWay = {
 	repeat: false,
 
 	// main function of the object
-	doIt() {
-		
+	doIt() {		
 		this.repeat = false;
 
 		// iterate over 9 rows and columns
 		for (let i = 0; i < 9; i++) {			
-			
 			this.checkRow(i);
 			this.checkColumn(i);			
 		}
@@ -25,20 +23,17 @@ var secondWay = {
 
 	// checks if we can solve a cell in a row
 	checkRow(row) {
-
 		// create just one array from the whole row (all the possibilities together)
 		let array = this.concatArrays(comp.secondBoard[row]);
 		
 		// trying to find numbers 1 to 9 in "array"
-		for (let i = 1; i < 10; i++) {		
-			
+		for (let i = 1; i < 10; i++) {				
 			/*
 			If condition is true:
 				- number "i" has only one possibility where it can be in row "i".
 				- another cell is solved and can be updated
 			*/
 			if(this.oneItem(array, i)) {
-
 				// identifies which cell to update
 				let column = this.whichCell(comp.secondBoard[row], i);			
 				
@@ -51,8 +46,7 @@ var secondWay = {
 	},
 
 	// checks if we can solve a cell in a column
-	checkColumn(column) {
-		
+	checkColumn(column) {		
 		let array = [];
 				
 		// create array of array
@@ -62,15 +56,13 @@ var secondWay = {
 		let secondArray = this.concatArrays(array);		
 
 		// trying to find numbers 1 to 9 in "secondArray"
-		for (let i = 1; i < 10; i++) {			
-
+		for (let i = 1; i < 10; i++) {
 			/*
 			If condition is true:
 				- number "i" has only one possibility where it can be in row "i".
 				- another cell is solved and can be updated
 			*/
 			if(this.oneItem(secondArray, i)) {
-
 				// we have to identify which cell to update
 				let row = this.whichCell(array, i);				
 								
@@ -83,13 +75,11 @@ var secondWay = {
 	},
 
 	// concatenate array of arrays into one big array
-	concatArrays(array) {
-		
+	concatArrays(array) {		
 		let newArray = [];
 
 		// iterate over all rows/columns
 		for (let i = 0; i < 9; i++) {
-
 			newArray = newArray.concat(array[i]);
 		}
 		// return concatenated and sorted array
@@ -98,7 +88,6 @@ var secondWay = {
 
 	// identify if a value is included only once in given array
 	oneItem(array, value) {
-
 		// all the values that do not match given value are deleted from the array
 		let newArray = array.filter( v => v === value );
 
@@ -111,10 +100,8 @@ var secondWay = {
 	"Array" parameter contains array of array.
 	*/
 	whichCell(array, value) {
-
 		// iterate over all rows/columns
-		for (let i = 0; i < 9; i++) {
-		
+		for (let i = 0; i < 9; i++) {		
 			// if "array[i]" includes the "value", we have the result and "i" represents cell number
 			if (array[i].includes(value)) {return i;}
 		}
