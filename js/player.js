@@ -63,7 +63,7 @@ var player = {
 		*/
 		if(value.length > 1 || !(value > 0 && value < 10)) {
 			let newValue = 0;
-			for( digit of value ) {
+			for( let digit of value ) {
 				if(digit > 0 && digit < 10) {newValue = digit; break;}
 			}
 			value = newValue;
@@ -120,7 +120,7 @@ var player = {
 			player.tempInput.value = '';
 		} else {
 			let newValue = '';
-			for( digit of player.tempInput.value ) {				
+			for( let digit of player.tempInput.value ) {				
 				if(digit != 0) {newValue = digit;}
 			}
 			player.tempInput.value = newValue;		
